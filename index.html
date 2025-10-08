@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PralaV - Video Editor Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Scroll Animation Library CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark gray background */
+        }
+        .video-wrapper {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            overflow: hidden; /* Ensures content respects border radius */
+        }
+        .video-wrapper:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.4); /* Indigo shadow on hover */
+        }
+        /* Custom scrollbar for a more modern look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366f1;
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+
+    <!-- Header -->
+    <header class="bg-gray-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-10 border-b border-gray-700">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-white tracking-wider">
+                <a href="#" class="hover:text-indigo-400 transition-colors">PRALAV</a>
+            </h1>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#work" class="text-gray-300 hover:text-indigo-400 transition-colors duration-300">Work</a>
+                <a href="#about" class="text-gray-300 hover:text-indigo-400 transition-colors duration-300">About</a>
+                <a href="#contact" class="text-gray-300 hover:text-indigo-400 transition-colors duration-300">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-24 text-center">
+            <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4" data-aos="fade-down">
+                Editing Reality, <span class="text-indigo-400">Crafting Perception.</span>
+            </h2>
+            <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                Transforming raw footage into captivating visual narratives that engage, inspire, and leave a lasting impression.
+            </p>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="py-16 bg-gray-900/50 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h3 class="text-3xl font-bold text-center text-white mb-12" data-aos="fade-up">My Work</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+
+                    <!-- Video 1 -->
+                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden" data-aos="fade-up">
+                        <div class="video-wrapper rounded-t-lg">
+                            <iframe class="w-full aspect-[4/5]" src="https://www.instagram.com/p/DPijJJvE13C/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="text-xl font-semibold text-white">Messi Masterclass</h4>
+                            <p class="text-gray-400 mt-2">A high-energy sports edit showcasing dynamic cuts and visual effects.</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 2 -->
+                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="150">
+                        <div class="video-wrapper rounded-t-lg">
+                            <iframe class="w-full aspect-[4/5]" src="https://www.instagram.com/p/DOsTsa4k_ib/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="text-xl font-semibold text-white">@mercy.igl sorry for late edit 😭</h4>
+                            <p class="text-gray-400 mt-2">A cinematic piece with a focus on storytelling and color grading.</p>
+                        </div>
+                    </div>
+
+                    <!-- Video 3 -->
+                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                        <div class="video-wrapper rounded-t-lg">
+                            <iframe class="w-full aspect-[9/16]" src="https://www.youtube.com/embed/LbxTgITv5ns" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="text-xl font-semibold text-white">CLUTCHING IS A HABIT.......</h4>
+                            <p class="text-gray-400 mt-2">An experimental edit exploring creative transitions and sound design.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20">
+            <div class="container mx-auto px-6 max-w-4xl text-center" data-aos="fade-in" data-aos-duration="1000">
+                <h3 class="text-3xl font-bold text-white mb-6">About Me</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    I'm Pralav, a passionate and detail-oriented video editor with a love for storytelling. My goal is to transform raw footage into a polished, impactful final product that resonates with audiences. I am proficient in a range of editing software including Adobe Premiere Pro, After Effects, and DaVinci Resolve, allowing me to bring any creative vision to life.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-gray-900/50">
+            <div class="container mx-auto px-6 max-w-3xl text-center" data-aos="zoom-in">
+                <h3 class="text-3xl font-bold text-white mb-4">Let's Connect</h3>
+                <p class="text-gray-400 mb-8">Ready to create something amazing? Reach out to me on Instagram!</p>
+                <a href="https://www.instagram.com/ig_sinisterrrr/" target="_blank" rel="noopener noreferrer" class="bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-indigo-500 transition-all duration-300 inline-flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919 4.919 1.266-.058 1.644-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.058-1.689-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
+                    <span>Contact on Instagram</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
+            <p>&copy; 2024 PralaV. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- AOS Scroll Animation Library JS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800, // Animation duration
+        once: true, // Whether animation should happen only once
+      });
+    </script>
+
+</body>
+</html>
+
