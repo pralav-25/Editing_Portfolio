@@ -74,7 +74,8 @@
         <section id="work" class="py-16 bg-gray-900/50 overflow-hidden">
             <div class="container mx-auto px-6">
                 <h3 class="text-3xl font-bold text-center text-white mb-12" data-aos="fade-up">My Work</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <!-- Changed to a 2-column grid on medium and larger screens for a balanced look with 4 items -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
 
                     <!-- Video 1 -->
                     <div class="video-card bg-gray-800 rounded-lg overflow-hidden" data-aos="fade-up">
@@ -86,8 +87,18 @@
                         </div>
                     </div>
 
-                    <!-- Video 2 -->
+                    <!-- Video 2 (Previously Video 4) -->
                     <div class="video-card bg-gray-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="150">
+                        <div class="video-wrapper rounded-t-lg">
+                            <iframe class="w-full aspect-[4/5]" src="https://www.instagram.com/p/DPmZmWJE9JM/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="text-xl font-semibold text-white">IronMan x Poster Boy....</h4>
+                        </div>
+                    </div>
+
+                    <!-- Video 3 (Previously Video 2) -->
+                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="300">
                         <div class="video-wrapper rounded-t-lg">
                             <iframe class="w-full aspect-[4/5]" src="https://www.instagram.com/p/DOsTsa4k_ib/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
                         </div>
@@ -96,8 +107,8 @@
                         </div>
                     </div>
 
-                    <!-- Video 3 -->
-                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <!-- Video 4 (Previously Video 3) -->
+                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="450">
                         <div class="video-wrapper rounded-t-lg">
                             <iframe class="w-full aspect-[9/16]" src="https://www.youtube.com/embed/LbxTgITv5ns" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
@@ -150,4 +161,3 @@
 
 </body>
 </html>
-
