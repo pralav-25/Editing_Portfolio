@@ -3,161 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PralaV - Video Editor Portfolio</title>
+    <title>SINISTER | The Apex Predator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- AOS Scroll Animation Library CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Space+Grotesk:wght@300;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
+        :root {
+            --kohli-red: #DC2626;   /* Aggression */
+            --kohli-gold: #D4AF37;  /* Royalty */
+            --max-orange: #FF6D00;  /* Dutch Lion */
+            --bg: #050505;
+            --surface: #0a0a0a;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
         html {
             scroll-behavior: smooth;
+            background-color: var(--bg);
         }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Dark gray background */
+            color: #ffffff;
+            overflow-x: hidden;
+            letter-spacing: -0.02em;
         }
-        .video-wrapper {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            overflow: hidden; /* Ensures content respects border radius */
+
+        h1, h2, h3, .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
         }
-        .video-wrapper:hover {
-            transform: scale(1.03);
-            box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.4); /* Indigo shadow on hover */
+
+        /* The Champion Gradient */
+        .text-gradient-champ {
+            background: linear-gradient(to right, var(--kohli-red), var(--max-orange), var(--kohli-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        /* Custom scrollbar for a more modern look */
-        ::-webkit-scrollbar {
-            width: 8px;
+
+        /* Speed Skew Effect */
+        .skew-hover {
+            transition: transform 0.3s ease;
         }
-        ::-webkit-scrollbar-track {
-            background: #1f2937;
+        .skew-hover:hover {
+            transform: skewX(-15deg);
         }
-        ::-webkit-scrollbar-thumb {
-            background: #4f46e5;
-            border-radius: 10px;
+
+        /* Grid Lines Background - Carbon Fiber Feel */
+        .grid-bg {
+            background-size: 30px 30px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6366f1;
+
+        /* HUD Style Video Card */
+        .video-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--kohli-red), var(--max-orange));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+            z-index: 10;
+        }
+
+        .video-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .video-card:hover {
+            border-color: var(--max-orange);
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 20px 40px -20px rgba(255, 109, 0, 0.2);
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            width: 24px;
+            height: 24px;
+            border: 1px solid var(--max-orange);
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        #cursor::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--kohli-red);
+            border-radius: 50%;
+        }
+
+        /* Racing Stripe Button */
+        .btn-racing {
+            background: white;
+            color: black;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: color 0.3s ease;
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+        }
+        .btn-racing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--kohli-red), var(--max-orange));
+            z-index: -1;
+            transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1); 
+            transform: skewX(-20deg);
+            transform-origin: left;
+            left: -20%;
+        }
+        .btn-racing:hover::before {
+            width: 150%;
+        }
+        .btn-racing:hover {
+            color: white;
+        }
+
+        /* Signature Stroke */
+        .signature-text {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
+        }
+
+        .nav-link:hover {
+            color: var(--max-orange);
+        }
+
+        #spark-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* Clean Embedded Content */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body class="text-gray-200">
+<body class="selection:bg-orange-600 selection:text-white grid-bg">
+
+    <div id="cursor" class="hidden md:flex"></div>
+    <canvas id="spark-canvas"></canvas>
 
     <!-- Header -->
-    <header class="bg-gray-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-10 border-b border-gray-700">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-white tracking-wider">
-                <a href="#" class="hover:text-indigo-400 transition-colors">PRALAV</a>
-            </h1>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#work" class="text-gray-300 hover:text-indigo-400 transition-colors duration-300">Work</a>
-                <a href="#about" class="text-gray-300 hover:text-indigo-400 transition-colors duration-300">About</a>
-                <a href="#contact" class="text-gray-300 hover:text-indigo-400 transition-colors duration-300">Contact</a>
-            </nav>
+    <header class="fixed top-0 left-0 right-0 z-[100] border-b border-white/5 bg-black/90 backdrop-blur-xl">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#" class="text-2xl font-black tracking-tighter italic">SINISTER<span class="text-[#FF6D00]">.</span></a>
+            
+            <div class="hidden md:flex items-center space-x-10 text-xs font-bold uppercase tracking-[0.2em]">
+                <a href="#work" class="nav-link transition-colors">Lap Times</a>
+                <a href="#about" class="nav-link transition-colors">Telemetry</a>
+                <a href="#contact" class="nav-link transition-colors">Pit Wall</a>
+            </div>
+
+            <a href="#contact" class="hidden md:block text-xs font-bold uppercase border border-white/20 px-6 py-3 hover:border-[#FF6D00] hover:text-[#FF6D00] transition-all">
+                Lights Out
+            </a>
         </div>
     </header>
 
-    <main class="pt-20">
+    <main>
         <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-24 text-center">
-            <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4" data-aos="fade-down">
-                Editing Reality, <span class="text-indigo-400">Crafting Perception.</span>
-            </h2>
-            <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                Transforming raw footage into captivating visual narratives that engage, inspire, and leave a lasting impression.
-            </p>
+        <section class="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden pt-20">
+            <div class="absolute inset-0 z-0 flex items-center justify-center opacity-[0.04] select-none pointer-events-none overflow-hidden">
+                <span class="text-[30vw] font-black italic tracking-tighter transform -skew-x-12 translate-x-[-20%]">18</span>
+                <span class="text-[30vw] font-black italic tracking-tighter text-transparent" style="-webkit-text-stroke: 4px white; transform: skewX(-12deg) translateX(-10%);">1</span>
+            </div>
+            
+            <div class="relative z-10 w-full max-w-7xl">
+                <div class="flex flex-col md:flex-row items-end justify-between border-b border-white/10 pb-8 mb-8" data-aos="fade-right">
+                    <div class="flex items-center gap-3">
+                        <div class="w-2 h-2 bg-[#DC2626]"></div>
+                        <div class="w-2 h-2 bg-[#FF6D00]"></div>
+                        <div class="w-2 h-2 bg-[#D4AF37]"></div>
+                        <p class="text-white font-bold tracking-[0.2em] text-sm uppercase">/ Chase Master &times; World Champion</p>
+                    </div>
+                    <p class="text-gray-500 font-mono text-xs">SOFT TYRES / FULL ATTACK MODE</p>
+                </div>
+
+                <h1 class="text-6xl md:text-9xl font-black leading-[0.85] tracking-tighter mb-12 uppercase italic" data-aos="fade-up" data-aos-delay="100">
+                    Simply <br>
+                    <span class="text-gradient-champ">Lovely.</span>
+                </h1>
+
+                <div class="flex flex-col md:flex-row gap-8 items-start" data-aos="fade-up" data-aos-delay="200">
+                    <div class="max-w-xl">
+                        <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                            Editing with the <span class="text-[#DC2626]">aggression of Kohli</span> and the <span class="text-[#FF6D00]">precision of Verstappen</span>. No lift, no coast. Just pure visual dominance from lights out to the checkered flag.
+                        </p>
+                        <a href="#work" class="btn-racing inline-block px-10 py-4 font-bold uppercase tracking-wider text-sm skew-x-[-10deg]">
+                            <span class="inline-block skew-x-[10deg]">Full Send</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute bottom-10 right-10 flex flex-col items-center gap-2" data-aos="fade-in" data-aos-delay="500">
+                <span class="text-[10px] uppercase tracking-widest text-gray-500 rotate-90 origin-right translate-x-4">Purple Sectors</span>
+                <div class="w-[1px] h-16 bg-gradient-to-b from-[#FF6D00] to-transparent"></div>
+            </div>
         </section>
 
         <!-- Work Section -->
-        <section id="work" class="py-16 bg-gray-900/50 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <h3 class="text-3xl font-bold text-center text-white mb-12" data-aos="fade-up">My Work</h3>
-                <!-- Changed to a 2-column grid on medium and larger screens for a balanced look with 4 items -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-
-                    <!-- Video 1 -->
-                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden" data-aos="fade-up">
-                        <div class="video-wrapper rounded-t-lg">
-                            <iframe class="w-full aspect-[4/5]" src="https://www.instagram.com/p/DPijJJvE13C/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+        <section id="work" class="py-32 relative z-10">
+            <div class="container mx-auto px-6 max-w-7xl">
+                <div class="flex items-center gap-4 mb-20" data-aos="fade-right">
+                    <div class="w-12 h-2 bg-gradient-to-r from-[#DC2626] to-[#FF6D00]"></div>
+                    <h3 class="text-sm font-bold tracking-[0.2em] uppercase">Race Highlights</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
+                    
+                    <!-- P1 -->
+                    <div class="group" data-aos="fade-up">
+                        <div class="video-card w-full bg-black mb-6" style="aspect-ratio: 4 / 5;">
+                            <div class="w-full h-full overflow-y-auto no-scrollbar bg-zinc-950 flex justify-center">
+                                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DPmZmWJE9JM/" data-instgrm-version="14" style="background:#000; border:0; margin:0; padding:0; width:100%;"></blockquote>
+                            </div>
                         </div>
-                        <div class="p-5">
-                            <h4 class="text-xl font-semibold text-white">Messi Masterclass</h4>
-                        </div>
-                    </div>
-
-                    <!-- Video 2 (Previously Video 4) -->
-                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="150">
-                        <div class="video-wrapper rounded-t-lg">
-                            <iframe class="w-full aspect-[4/5]" src="https://www.instagram.com/p/DPmZmWJE9JM/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
-                        </div>
-                        <div class="p-5">
-                            <h4 class="text-xl font-semibold text-white">IronMan x Poster Boy....</h4>
-                        </div>
-                    </div>
-
-                    <!-- Video 3 (Previously Video 2) -->
-                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="300">
-                        <div class="video-wrapper rounded-t-lg">
-                            <iframe class="w-full aspect-[4/5]" src="https://www.instagram.com/p/DOsTsa4k_ib/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
-                        </div>
-                        <div class="p-5">
-                            <h4 class="text-xl font-semibold text-white">@mercy.igl sorry for late edit 😭</h4>
+                        <div class="flex justify-between items-start border-b border-white/10 pb-4">
+                            <div>
+                                <h4 class="text-2xl font-bold uppercase italic mb-1 group-hover:text-[#FF6D00] transition-colors">The Overtake</h4>
+                                <p class="text-gray-500 text-xs font-mono uppercase">High Pace / 2024</p>
+                            </div>
+                            <span class="text-2xl font-black text-white/10 group-hover:text-[#D4AF37] transition-colors">P1</span>
                         </div>
                     </div>
 
-                    <!-- Video 4 (Previously Video 3) -->
-                    <div class="video-card bg-gray-800 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="450">
-                        <div class="video-wrapper rounded-t-lg">
-                            <iframe class="w-full aspect-[9/16]" src="https://www.youtube.com/embed/LbxTgITv5ns" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <!-- P2 -->
+                    <div class="group" data-aos="fade-up" data-aos-delay="100">
+                        <div class="video-card w-full bg-black mb-6" style="aspect-ratio: 4 / 5;">
+                            <div class="w-full h-full overflow-y-auto no-scrollbar bg-zinc-950 flex justify-center">
+                                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DTUwNT_k-5J/" data-instgrm-version="14" style="background:#000; border:0; margin:0; padding:0; width:100%;"></blockquote>
+                            </div>
                         </div>
-                        <div class="p-5">
-                            <h4 class="text-xl font-semibold text-white">CLUTCHING IS A HABIT.......</h4>
+                        <div class="flex justify-between items-start border-b border-white/10 pb-4">
+                            <div>
+                                <h4 class="text-2xl font-bold uppercase italic mb-1 group-hover:text-[#DC2626] transition-colors">Desert Storm</h4>
+                                <p class="text-gray-500 text-xs font-mono uppercase">Narrative / 2024</p>
+                            </div>
+                            <span class="text-2xl font-black text-white/10 group-hover:text-[#D4AF37] transition-colors">P2</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- INSTAGRAM EMBEDS (BOTH KEPT) -->
+        <script async src="//www.instagram.com/embed.js"></script>
+        
+        <script src="https://www.instagram.com/embed.js" async onload="if(window.instgrm){window.instgrm.Embeds.process();}"></script>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        
+        
+        
+        <!-- About Section -->
+        <section id="about" class="py-32 border-t border-white/10 bg-zinc-900/20 relative z-10">
+            <div class="container mx-auto px-6 max-w-7xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-7" data-aos="fade-up">
+                        <h3 class="text-6xl md:text-8xl font-black uppercase italic leading-none mb-10 text-white">
+                            Race <br><span class="signature-text">Craft.</span>
+                        </h3>
+                        <div class="pl-8 border-l-2 border-[#FF6D00]">
+                            <p class="text-xl text-gray-300 mb-6 leading-relaxed font-light">
+                                I'm <strong class="text-white">Sinister</strong>. My philosophy is simple: <span class="text-gradient-champ font-bold">"If you no longer go for a gap that exists, you are no longer an editor."</span>
+                            </p>
+                            <p class="text-gray-500 leading-relaxed max-w-xl">
+                                Like Max on a qualifying lap or Virat in a run chase, I operate in the zone. Total focus. Calculated risks. Delivering the perfect cut when the pressure is highest.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5" data-aos="fade-left">
+                        <div class="bg-black border border-white/10 p-8 relative">
+                            <div class="absolute top-0 right-0 p-2 bg-[#FF6D00] text-black text-[10px] font-bold uppercase">Setup Sheet</div>
+                            <ul class="space-y-6 mt-4">
+                                <li class="flex justify-between items-end border-b border-white/10 pb-2">
+                                    <span class="text-gray-500 text-sm uppercase tracking-widest">Engine</span>
+                                    <span class="font-bold text-lg text-white">DaVinci Resolve</span>
+                                </li>
+                                <li class="flex justify-between items-end border-b border-white/10 pb-2">
+                                    <span class="text-gray-500 text-sm uppercase tracking-widest">Driving Style</span>
+                                    <span class="font-bold text-lg text-white">Aggressive</span>
+                                </li>
+                                <li class="flex justify-between items-end border-b border-white/10 pb-2">
+                                    <span class="text-gray-500 text-sm uppercase tracking-widest">Wins</span>
+                                    <span class="font-bold text-lg text-[#D4AF37]">Still Counting</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="py-20">
-            <div class="container mx-auto px-6 max-w-4xl text-center" data-aos="fade-in" data-aos-duration="1000">
-                <h3 class="text-3xl font-bold text-white mb-6">About Me</h3>
-                <p class="text-gray-400 leading-relaxed">
-                    I'm Pralav, a passionate and detail-oriented video editor with a love for storytelling. My goal is to transform raw footage into a polished, impactful final product that resonates with audiences. I am proficient in a range of editing software including Adobe Premiere Pro, After Effects, and DaVinci Resolve, allowing me to bring any creative vision to life.
-                </p>
-            </div>
-        </section>
+        <!-- Footer -->
+        <footer id="contact" class="py-20 border-t border-white/10 bg-black relative overflow-hidden z-10">
+            <div class="container mx-auto px-6 max-w-7xl relative z-10 text-center">
+                <h2 class="text-[12vw] font-black uppercase italic leading-none text-white/5 pointer-events-none select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
+                    Box Box Box
+                </h2>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-gray-900/50">
-            <div class="container mx-auto px-6 max-w-3xl text-center" data-aos="zoom-in">
-                <h3 class="text-3xl font-bold text-white mb-4">Let's Connect</h3>
-                <p class="text-gray-400 mb-8">Ready to create something amazing? Reach out to me on Instagram!</p>
-                <a href="https://www.instagram.com/ig_sinisterrrr/" target="_blank" rel="noopener noreferrer" class="bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-indigo-500 transition-all duration-300 inline-flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919 4.919 1.266-.058 1.644-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.058-1.689-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z"/></svg>
-                    <span>Contact on Instagram</span>
-                </a>
+                <div class="relative z-20" data-aos="zoom-in">
+                    <p class="text-[#FF6D00] font-bold tracking-[0.3em] uppercase mb-6 text-sm">Pit Window Open</p>
+                    <h3 class="text-4xl md:text-6xl font-black uppercase mb-10">Ready to Send It?</h3>
+                    <a href="https://www.instagram.com/ig_sinisterrrr/" target="_blank" class="btn-racing inline-block px-12 py-5 font-bold uppercase tracking-widest text-lg skew-x-[-10deg]">
+                        <span class="inline-block skew-x-[10deg]">Confirm Strategy</span>
+                    </a>
+                </div>
+
+                <div class="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-mono uppercase tracking-widest">
+                    <p>&copy; 2024 Sinister. All Rights Reserved.</p>
+                </div>
             </div>
-        </section>
+        </footer>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-700">
-        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
-            <p>&copy; 2024 PralaV. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- AOS Scroll Animation Library JS -->
+    <script async src="//www.instagram.com/embed.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-      AOS.init({
-        duration: 800, // Animation duration
-        once: true, // Whether animation should happen only once
-      });
-    </script>
+        // Init AOS
+        AOS.init({
+            duration: 600,
+            once: false,
+            easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+        });
 
+        // Trigger Instagram re-process on load
+        window.onload = function() {
+            if (window.instgrm) {
+                window.instgrm.Embeds.process();
+            }
+        };
+
+        // Custom Cursor
+        const cursor = document.querySelector('#cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = (e.clientX - 12) + 'px';
+            cursor.style.top = (e.clientY - 12) + 'px';
+        });
+
+        const clickables = document.querySelectorAll('a, button, .video-card');
+        clickables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2)';
+                cursor.style.borderColor = '#FF6D00';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.borderColor = '#FF6D00';
+            });
+        });
+
+        // Spark Canvas
+        const canvas = document.getElementById('spark-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+        const colors = ['#FF6D00', '#DC2626', '#D4AF37'];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * -2 - 0.5;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.life = Math.random() * 100 + 50;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX + 0.5;
+                this.y += this.speedY;
+                this.life--;
+                if (this.life <= 0 || this.y < 0) {
+                    this.reset();
+                    this.y = height + 10;
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        for (let i = 0; i < 50; i++) particles.push(new Particle());
+        animate();
+    </script>
 </body>
 </html>
