@@ -4,43 +4,37 @@ import { useEffect, useRef } from 'react';
 import {
   ArrowDown,
   ArrowDownRight,
+  ArrowUp,
   ArrowUpRight,
   AtSign,
   Play,
-  Sparkles,
 } from 'lucide-react';
-
-const tracks = [
-  { label: 'V1', clips: ['INT. NIGHT', 'HARD CUT', 'CLOSE UP'] },
-  { label: 'V2', clips: ['SPEED RAMP', 'MATCH CUT'] },
-  { label: 'A1', clips: ['DIALOGUE', 'IMPACT', 'RISE'] },
-];
 
 const projects = [
   {
     index: '01',
-    position: 'P1',
-    title: 'The Overtake',
-    type: 'Short-form / Sports edit',
-    note: 'Momentum built frame by frame—hard transitions, controlled speed ramps, and a finish that lands on impact.',
+    title: 'Velocity Study',
+    type: 'Sport / Short-form',
+    note: 'A pace-first edit built around acceleration, interruption, and the split-second before impact.',
     href: 'https://www.instagram.com/reel/DPmZmWJE9JM/',
     embed: 'https://www.instagram.com/reel/DPmZmWJE9JM/embed',
+    accent: 'blue',
   },
   {
     index: '02',
-    position: 'P2',
-    title: 'Desert Storm',
-    type: 'Social / Narrative cut',
-    note: 'A compact story shaped through contrast, musical timing, and purposeful restraint between high-energy beats.',
+    title: 'Atmosphere Study',
+    type: 'Story / Social',
+    note: 'A compact visual narrative where contrast, music, and negative space do as much work as the cut.',
     href: 'https://www.instagram.com/p/DTUwNT_k-5J/',
     embed: 'https://www.instagram.com/p/DTUwNT_k-5J/embed',
+    accent: 'coral',
   },
 ];
 
-const process = [
-  ['01', 'Find the pulse', 'Every sequence starts with the emotional beat—not the effect.'],
-  ['02', 'Build pressure', 'Pacing, sound, and motion are layered to pull the viewer forward.'],
-  ['03', 'Land the cut', 'The final frame earns its place. Nothing stays just because it looks good.'],
+const method = [
+  ['01', 'Listen', 'Find the pulse already hiding inside the footage.'],
+  ['02', 'Shape', 'Build tension with rhythm, sound, and deliberate contrast.'],
+  ['03', 'Finish', 'Remove the noise until only the feeling remains.'],
 ];
 
 export default function Home() {
@@ -55,17 +49,16 @@ export default function Home() {
     const update = () => {
       frame = 0;
       const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-      const pageProgress = window.scrollY / maxScroll;
-      root.style.setProperty('--page-progress', String(pageProgress));
+      root.style.setProperty('--page-progress', String(window.scrollY / maxScroll));
 
       if (stage && !reduced) {
-        const heroProgress = Math.min(window.scrollY / (window.innerHeight * 1.05), 1);
-        const baseScale = window.innerWidth <= 600 ? 0.72 : 1;
-        stage.style.setProperty('--scene-rx', `${56 - heroProgress * 25}deg`);
-        stage.style.setProperty('--scene-rz', `${-27 + heroProgress * 19}deg`);
-        stage.style.setProperty('--scene-ry', `${8 - heroProgress * 8}deg`);
-        stage.style.setProperty('--scene-y', `${-50 - heroProgress * 7}%`);
-        stage.style.setProperty('--scene-scale', String(baseScale * (1 - heroProgress * 0.1)));
+        const progress = Math.min(window.scrollY / (window.innerHeight * 1.05), 1);
+        const baseScale = window.innerWidth <= 600 ? 0.76 : 1;
+        stage.style.setProperty('--scene-rx', `${12 - progress * 8}deg`);
+        stage.style.setProperty('--scene-rz', `${-6 + progress * 8}deg`);
+        stage.style.setProperty('--scene-ry', `${-14 + progress * 22}deg`);
+        stage.style.setProperty('--scene-y', `${-50 - progress * 7}%`);
+        stage.style.setProperty('--scene-scale', String(baseScale * (1 - progress * 0.09)));
       }
     };
 
@@ -77,17 +70,15 @@ export default function Home() {
       if (!stage || reduced) return;
       const x = event.clientX / window.innerWidth - 0.5;
       const y = event.clientY / window.innerHeight - 0.5;
-      stage.style.setProperty('--pointer-x', `${x * 7}deg`);
-      stage.style.setProperty('--pointer-y', `${y * -5}deg`);
+      stage.style.setProperty('--pointer-x', `${x * 8}deg`);
+      stage.style.setProperty('--pointer-y', `${y * -6}deg`);
     };
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('is-visible');
-        });
-      },
-      { threshold: 0.14 },
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      }),
+      { threshold: 0.12 },
     );
 
     root.classList.add('motion-ready');
@@ -111,102 +102,94 @@ export default function Home() {
     <main className="site-shell">
       <div className="scroll-progress" aria-hidden="true"><span /></div>
 
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="Sinister — back to top">
-          SINISTER<span>®</span>
+      <header className="studio-header">
+        <a className="studio-mark" href="#top" aria-label="Sinister — back to top">
+          SINISTER<span>/EDIT</span>
         </a>
-        <p className="header-status">
-          <span /> AVAILABLE FOR SELECT PROJECTS
-        </p>
+        <p>INDEPENDENT VIDEO EDITOR · INDIA</p>
         <nav aria-label="Main navigation">
-          <a href="#work">Work</a>
-          <a href="#about">Profile</a>
-          <a className="nav-cta" href="#contact">Start a project</a>
+          <a href="#work">Selected work</a>
+          <a href="#about">About</a>
+          <a className="studio-contact" href="#contact">Let&apos;s talk <ArrowUpRight size={14} /></a>
         </nav>
       </header>
 
-      <section className="hero" id="top">
-        <div className="hero-grid" aria-hidden="true" />
-        <div className="hero-copy">
-          <p className="eyebrow"><span>01</span> VIDEO EDITOR / VISUAL STORYTELLER</p>
+      <section className="studio-hero" id="top">
+        <div className="studio-copy">
+          <p className="studio-kicker"><span>04—26</span> SHORT FORM · SPORTS · STORY</p>
           <h1>
-            I CUT FOR
-            <span>IMPACT.</span>
+            CUT THE
+            <span>EXPECTED.</span>
           </h1>
-          <p className="hero-intro">
-            Aggressive pacing. Precise storytelling. Edits engineered to make
-            people stop, feel, and remember.
+          <p className="studio-intro">
+            Raw footage in. A sharper feeling out. I shape pace, sound, and
+            motion into edits people stay for.
           </p>
-          <div className="hero-actions">
-            <a className="primary-button" href="#work">
-              <Play size={15} fill="currentColor" /> View selected work
+          <div className="studio-actions">
+            <a className="studio-primary" href="#work">
+              See the cuts <ArrowDownRight size={17} />
             </a>
-            <a className="text-link" href="https://www.instagram.com/ig_sinisterrrr/" target="_blank" rel="noreferrer">
-              <AtSign size={17} /> Instagram <ArrowDownRight size={16} />
+            <a className="studio-link" href="https://www.instagram.com/ig_sinisterrrr/" target="_blank" rel="noreferrer">
+              <AtSign size={16} /> @ig_sinisterrrr
             </a>
           </div>
         </div>
 
-        <div className="timeline-stage" ref={stageRef} aria-label="Animated three-dimensional editing timeline">
-          <div className="orbit-label orbit-label-one">PACE / 98</div>
-          <div className="orbit-label orbit-label-two">STORY / LOCKED</div>
-          <div className="timeline-scene">
-            <div className="timeline-topbar">
-              <span className="window-controls"><i /><i /><i /></span>
-              <strong>SINISTER_CUT_07</strong>
-              <span>00:00:18:01</span>
+        <div className="frame-stage" ref={stageRef} aria-label="Interactive three-dimensional film frames">
+          <div className="frame-tag frame-tag-a">PACE / MOTION / FEEL</div>
+          <div className="frame-tag frame-tag-b">FRAME 018</div>
+          <div className="film-stack">
+            <div className="film-frame film-frame-back"><span>RAW / 01</span></div>
+            <div className="film-frame film-frame-mid">
+              <div className="frame-noise" />
+              <strong>MOVE</strong>
             </div>
-            <div className="preview-frame">
-              <div className="preview-number">18</div>
-              <div className="preview-play"><Play size={22} fill="currentColor" /></div>
-              <span>PLAYBACK / FULL RES</span>
+            <div className="film-frame film-frame-front">
+              <div className="frame-ui">
+                <span>SINISTER / FINAL CUT</span>
+                <span>00:00:18:24</span>
+              </div>
+              <div className="frame-screen">
+                <div className="frame-play"><Play size={22} fill="currentColor" /></div>
+                <div className="frame-word">FEEL</div>
+              </div>
+              <div className="frame-wave" aria-hidden="true">
+                {Array.from({ length: 34 }, (_, index) => (
+                  <i key={index} style={{ height: `${18 + ((index * 17) % 48)}%` }} />
+                ))}
+              </div>
+              <div className="frame-footer"><span>PLAYBACK 1×</span><span>FULL RES</span></div>
             </div>
-            <div className="timeline-ruler">
-              <span>00:00</span><span>00:08</span><span>00:16</span><span>00:24</span>
-            </div>
-            <div className="tracks">
-              {tracks.map((track, trackIndex) => (
-                <div className="track" key={track.label}>
-                  <span className="track-label">{track.label}</span>
-                  <div className="track-clips">
-                    {track.clips.map((clip, clipIndex) => (
-                      <span className={`clip clip-${trackIndex}-${clipIndex}`} key={clip}>
-                        {clip}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <span className="playhead" />
           </div>
-          <div className="timeline-shadow" aria-hidden="true" />
         </div>
 
-        <a className="scroll-cue" href="#work">
-          <span>SCROLL TO ENTER THE CUT</span>
-          <ArrowDownRight size={18} />
-        </a>
-        <p className="hero-index">© 2026 / SINISTER STUDIO</p>
+        <div className="studio-hero-footer">
+          <span>SCROLL / SELECTED WORK</span>
+          <span>CREATIVE DIRECTION · EDITING · RHYTHM</span>
+          <span>2026 PORTFOLIO</span>
+        </div>
       </section>
 
-      <div className="kinetic-strip" aria-label="Editing values">
-        <div>
-          PRECISION <i /> PACING <i /> EMOTION <i /> PRECISION <i /> PACING <i /> EMOTION <i />
-        </div>
+      <div className="signal-band" aria-label="Editing specialties">
+        <div>PACE <i /> SOUND <i /> MOTION <i /> FEEL <i /> PACE <i /> SOUND <i /> MOTION <i /> FEEL <i /></div>
       </div>
 
-      <section className="work-section" id="work">
-        <div className="section-kicker" data-reveal>
-          <span>02 / SELECTED WORK</span>
-          <p>Two cuts. Two rhythms. One standard: make every second earn attention.</p>
+      <section className="work-lab" id="work">
+        <div className="work-heading" data-reveal>
+          <p><span>02</span> SELECTED CUTS</p>
+          <h2>WORK THAT<br /><em>DOESN&apos;T WAIT.</em></h2>
+          <div>
+            <ArrowDown size={19} />
+            <span>Two edits. Two different energies.<br />Both designed to hold attention.</span>
+          </div>
         </div>
 
-        <div className="projects-grid">
-          {projects.map((project, projectIndex) => (
-            <article className={`project-card project-${projectIndex + 1}`} data-reveal key={project.title}>
-              <div className="project-media-shell">
-                <div className="project-media">
+        <div className="project-list">
+          {projects.map((project, index) => (
+            <article className={`lab-project lab-project-${project.accent}`} data-reveal key={project.title}>
+              <div className="lab-media-stage">
+                <span className="lab-index">PROJECT / {project.index}</span>
+                <div className="lab-iframe-shell">
                   <iframe
                     src={project.embed}
                     title={`${project.title} Instagram edit`}
@@ -214,15 +197,14 @@ export default function Home() {
                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                   />
                 </div>
-                <span className="position-badge">{project.position}</span>
-                <span className="project-corner">CUT / {project.index}</span>
+                <div className="lab-float-label">{index === 0 ? 'FAST / CONTROLLED' : 'QUIET / INTENTIONAL'}</div>
               </div>
-              <div className="project-info">
+              <div className="lab-project-copy">
                 <p>{project.type}</p>
-                <h2>{project.title}</h2>
+                <h3>{project.title}</h3>
                 <span>{project.note}</span>
                 <a href={project.href} target="_blank" rel="noreferrer">
-                  Watch full edit <ArrowUpRight size={17} />
+                  Open on Instagram <ArrowUpRight size={17} />
                 </a>
               </div>
             </article>
@@ -230,70 +212,63 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="statement-section">
-        <div className="statement-orbit" aria-hidden="true">
-          <span>FRAME</span><span>FEEL</span><span>FLOW</span>
+      <section className="method-section">
+        <div className="method-heading" data-reveal>
+          <p><span>03</span> HOW I WORK</p>
+          <h2>EMOTION SETS<br />THE RHYTHM.</h2>
+          <p className="method-lede">Everything else follows: the music, the movement, the cut, and the moment you choose to leave behind.</p>
         </div>
-        <p className="section-number" data-reveal>03 / THE METHOD</p>
-        <blockquote data-reveal>
-          NO LIFT. NO COAST.
-          <span>JUST THE RIGHT CUT AT THE RIGHT MOMENT.</span>
-        </blockquote>
-        <div className="process-grid">
-          {process.map(([index, title, copy]) => (
-            <div className="process-card" data-reveal key={index}>
+        <div className="method-grid">
+          {method.map(([index, title, copy]) => (
+            <article className="method-card" data-reveal key={index}>
               <span>{index}</span>
+              <div className="method-disc"><i /></div>
               <h3>{title}</h3>
               <p>{copy}</p>
-            </div>
+            </article>
           ))}
         </div>
       </section>
 
-      <section className="about-section" id="about">
-        <div className="about-heading" data-reveal>
-          <p>04 / PROFILE</p>
-          <h2>CALCULATED<br /><em>AGGRESSION.</em></h2>
+      <section className="profile-section" id="about">
+        <div className="profile-label" data-reveal><span>04</span> THE EDITOR</div>
+        <div className="profile-title" data-reveal>
+          <p>EDITOR, NOT</p>
+          <h2>DECORATOR.</h2>
         </div>
-        <div className="about-copy" data-reveal>
-          <div className="quote-mark">“</div>
+        <div className="profile-copy" data-reveal>
           <p>
-            I&apos;m <strong>Sinister</strong>. I edit with the aggression of a chase
-            master and the precision of a qualifying lap: total focus,
-            controlled risk, and no wasted movement.
+            Sinister is an independent video editor focused on short-form,
+            sports, and music-led stories. The goal is never more effects—it is
+            a clearer feeling.
           </p>
           <p>
-            From high-tempo sports edits to compact visual narratives, I use
-            DaVinci Resolve to turn raw footage into something that moves fast
-            without losing the story.
+            Working in DaVinci Resolve, every decision starts with rhythm:
+            when to build, when to break, and when to let a frame breathe.
           </p>
-          <div className="setup-row">
-            <span>PRIMARY TOOL</span><strong>DaVinci Resolve</strong>
-          </div>
-          <div className="setup-row">
-            <span>DRIVING STYLE</span><strong>Rhythm first</strong>
-          </div>
+          <a href="https://www.instagram.com/ig_sinisterrrr/" target="_blank" rel="noreferrer">
+            Follow the work <ArrowUpRight size={18} />
+          </a>
+        </div>
+        <div className="profile-tools" aria-label="Editing focus">
+          {['DAVINCI RESOLVE', 'SHORT-FORM', 'SPORTS', 'MUSIC-LED', 'SOCIAL'].map((item) => <span key={item}>{item}</span>)}
         </div>
       </section>
 
-      <section className="contact-section" id="contact">
-        <div className="contact-grid" aria-hidden="true" />
-        <p data-reveal><span /> PIT WINDOW OPEN / LET&apos;S MAKE SOMETHING MOVE</p>
-        <h2 data-reveal>YOUR STORY.<br /><em>FULL SEND.</em></h2>
-        <a className="contact-button" data-reveal href="https://www.instagram.com/ig_sinisterrrr/" target="_blank" rel="noreferrer">
-          <span>Start a conversation</span>
-          <span><AtSign size={18} /><ArrowUpRight size={19} /></span>
+      <section className="contact-lab" id="contact">
+        <p data-reveal>PROJECT WINDOW / OPEN</p>
+        <h2 data-reveal>LET&apos;S MAKE<br /><em>THE NEXT FRAME.</em></h2>
+        <a className="contact-pill" data-reveal href="https://www.instagram.com/ig_sinisterrrr/" target="_blank" rel="noreferrer">
+          <span>Start on Instagram</span><ArrowUpRight size={22} />
         </a>
         <footer>
-          <a className="brand" href="#top">SINISTER<span>®</span></a>
-          <p>VIDEO EDITOR / VISUAL STORYTELLER</p>
-          <p>© 2026 / ALL RIGHTS RESERVED</p>
+          <a className="studio-mark" href="#top">SINISTER<span>/EDIT</span></a>
+          <span>INDIA · AVAILABLE REMOTELY</span>
+          <span>© 2026</span>
         </footer>
       </section>
 
-      <a className="back-to-top" href="#top" aria-label="Back to top">
-        <Sparkles size={15} /><ArrowDown size={15} />
-      </a>
+      <a className="back-to-top" href="#top" aria-label="Back to top"><ArrowUp size={17} /></a>
     </main>
   );
 }

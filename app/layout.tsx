@@ -14,29 +14,29 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://sinister-editing-portfolio.websites4u.chatgpt.site'),
-  title: 'Sinister — Video Editor & Visual Storyteller',
-  description: 'Aggressive pacing, precise storytelling, and high-impact edits by Sinister.',
+  title: 'Sinister/Edit — Independent Video Editor',
+  description: 'Short-form, sports, and music-led video editing by Sinister.',
   applicationName: 'Sinister Editing Portfolio',
   keywords: ['video editor', 'DaVinci Resolve', 'sports edits', 'visual storytelling'],
   openGraph: {
-    title: 'Sinister — I Cut for Impact.',
-    description: 'Aggressive pacing. Precise storytelling. Edits engineered to make people stop, feel, and remember.',
+    title: 'Sinister/Edit — Cut the Expected.',
+    description: 'Raw footage in. A sharper feeling out. Short-form video editing by Sinister.',
     type: 'website',
     siteName: 'Sinister',
     url: 'https://sinister-editing-portfolio.websites4u.chatgpt.site',
     images: [
       {
         url: 'https://sinister-editing-portfolio.websites4u.chatgpt.site/og.png',
-        width: 1732,
-        height: 908,
-        alt: 'Sinister — I Cut for Impact.',
+        width: 1731,
+        height: 909,
+        alt: 'Sinister/Edit — Cut the Expected.',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sinister — I Cut for Impact.',
-    description: 'Aggressive pacing. Precise storytelling. High-impact edits.',
+    title: 'Sinister/Edit — Cut the Expected.',
+    description: 'Short-form, sports, and music-led video editing by Sinister.',
     images: ['https://sinister-editing-portfolio.websites4u.chatgpt.site/og.png'],
   },
   alternates: {
@@ -45,8 +45,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#070706',
-  colorScheme: 'dark',
+  themeColor: '#f2efe6',
+  colorScheme: 'light',
 };
 
 export default function RootLayout({
