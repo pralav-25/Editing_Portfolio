@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://sinister-editing-portfolio.websites4u.chatgpt.site'),
   title: 'Sinister — Video Editor & Visual Storyteller',
   description: 'Aggressive pacing, precise storytelling, and high-impact edits by Sinister.',
   applicationName: 'Sinister Editing Portfolio',
@@ -22,11 +23,24 @@ export const metadata: Metadata = {
     description: 'Aggressive pacing. Precise storytelling. Edits engineered to make people stop, feel, and remember.',
     type: 'website',
     siteName: 'Sinister',
+    url: 'https://sinister-editing-portfolio.websites4u.chatgpt.site',
+    images: [
+      {
+        url: 'https://sinister-editing-portfolio.websites4u.chatgpt.site/og.png',
+        width: 1732,
+        height: 908,
+        alt: 'Sinister — I Cut for Impact.',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Sinister — I Cut for Impact.',
     description: 'Aggressive pacing. Precise storytelling. High-impact edits.',
+    images: ['https://sinister-editing-portfolio.websites4u.chatgpt.site/og.png'],
+  },
+  alternates: {
+    canonical: 'https://sinister-editing-portfolio.websites4u.chatgpt.site',
   },
 };
 
