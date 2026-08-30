@@ -12,7 +12,12 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
+const siteUrl = process.env.SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : undefined);
+
 export const metadata: Metadata = {
+  ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
   title: 'Sinister — Video Editor & Visual Storyteller',
   description: 'Aggressive pacing, precise storytelling, and high-impact edits by Sinister.',
   applicationName: 'Sinister Editing Portfolio',
@@ -22,12 +27,23 @@ export const metadata: Metadata = {
     description: 'Aggressive pacing. Precise storytelling. Edits engineered to make people stop, feel, and remember.',
     type: 'website',
     siteName: 'Sinister',
+    ...(siteUrl ? { url: siteUrl } : {}),
+    images: [
+      {
+        url: '/og.png',
+        width: 1732,
+        height: 908,
+        alt: 'Sinister — I Cut for Impact.',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Sinister — I Cut for Impact.',
     description: 'Aggressive pacing. Precise storytelling. High-impact edits.',
+    images: ['/og.png'],
   },
+  ...(siteUrl ? { alternates: { canonical: siteUrl } } : {}),
 };
 
 export const viewport: Viewport = {
