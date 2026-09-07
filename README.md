@@ -1,5 +1,7 @@
 # Sinister/Edit — Video Editing Portfolio
 
+[![Checks](https://github.com/pralav-25/Editing_Portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/pralav-25/Editing_Portfolio/actions/workflows/ci.yml)
+
 An editorial portfolio for short-form, sports, and story-led video work. The
 site pairs embedded project reels with an interactive, motion-led presentation
 designed around pace, sound, and visual rhythm.
@@ -9,7 +11,8 @@ designed around pace, sound, and visual rhythm.
 ## Highlights
 
 - Responsive portfolio layout for desktop and mobile
-- Embedded project reels with direct links to the original work
+- Click-to-load project reels with direct links to the original work
+- Only one embedded player is mounted at a time; Close player stops and unloads it
 - Pointer and scroll-based scene motion
 - Reduced-motion support for visitors who prefer less animation
 - Semantic sections for selected work, process, profile, and contact
@@ -36,6 +39,7 @@ pnpm dev
 Useful checks:
 
 ```bash
+pnpm typecheck
 pnpm lint
 pnpm build
 ```
@@ -51,3 +55,12 @@ pnpm build
 
 The source is active. A new public deployment URL is being prepared; the former
 deployment has intentionally not been linked here because it is unavailable.
+
+## Media behavior
+
+Instagram is contacted only after a visitor selects **Load reel**. Closing a
+player or selecting another reel removes the previous iframe. Original links
+remain available if an embed is blocked or requires an Instagram login.
+
+Lint covers authored application code; the bundled Shadcn primitives retain their
+upstream implementation and are checked by TypeScript and the production build.
