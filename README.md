@@ -64,3 +64,7 @@ remain available if an embed is blocked or requires an Instagram login.
 
 Lint covers authored application code; the bundled Shadcn primitives retain their
 upstream implementation and are checked by TypeScript and the production build.
+
+For an independent deployment, set `SITE_URL` to its public origin to generate
+canonical and social URLs. On Vercel, the project production hostname is used
+automatically when available.
