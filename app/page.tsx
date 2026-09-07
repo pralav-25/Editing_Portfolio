@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   ArrowDown,
   ArrowDownRight,
@@ -38,6 +39,7 @@ const method = [
 ];
 
 export default function Home() {
+  const [activeProject, setActiveProject] = useState<string | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -190,12 +192,29 @@ export default function Home() {
               <div className="lab-media-stage">
                 <span className="lab-index">PROJECT / {project.index}</span>
                 <div className="lab-iframe-shell">
-                  <iframe
-                    src={project.embed}
-                    title={`${project.title} Instagram edit`}
-                    loading="lazy"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  />
+                  {activeProject === project.index ? (
+                    <>
+                      <iframe
+                        src={project.embed}
+                        title={`${project.title} Instagram edit`}
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allow="autoplay; encrypted-media; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                      <Button className="reel-close" variant="secondary" onClick={() => setActiveProject(null)} aria-label={`Close ${project.title}`}>
+                        Close player
+                      </Button>
+                    </>
+                  ) : (
+                    <div className="reel-cover">
+                      <span>SELECTED CUT / {project.index}</span>
+                      <strong>{project.title}</strong>
+                      <Button className="reel-load" variant="secondary" size="lg" onClick={() => setActiveProject(project.index)} aria-label={`Load ${project.title} from Instagram`}>
+                        <Play aria-hidden="true" /> Load reel
+                      </Button>
+                      <p>Loads an Instagram player. You can also open the original below.</p>
+                    </div>
+                  )}
                 </div>
                 <div className="lab-float-label">{index === 0 ? 'FAST / CONTROLLED' : 'QUIET / INTENTIONAL'}</div>
               </div>
