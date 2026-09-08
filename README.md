@@ -51,15 +51,18 @@ pnpm build
 - `app/layout.tsx` — page metadata and social-sharing configuration
 - `public/` — favicon and social-preview assets
 
-## Status
+## Deployment
 
-The source is active. A new public deployment URL is being prepared; the former
-deployment has intentionally not been linked here because it is unavailable.
+`pnpm build` exports a static site to `dist/client` and verifies the homepage and
+its referenced assets. `vercel.json` explicitly selects this public output and
+avoids treating the build as a Cloudflare Worker. `pnpm start` previews the export.
+The existing Vercel integration deploys changes to `main`.
 
 ## Media behavior
 
 Instagram is contacted only after a visitor selects **Load reel**. Closing a
-player or selecting another reel removes the previous iframe. Original links
+player or selecting another reel removes the previous iframe. Escape also closes
+the player; focus returns to its load button. Original links
 remain available if an embed is blocked or requires an Instagram login.
 
 Lint covers authored application code; the bundled Shadcn primitives retain their
