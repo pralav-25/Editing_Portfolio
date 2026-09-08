@@ -41,6 +41,20 @@ const method = [
 export default function Home() {
   const [activeProject, setActiveProject] = useState<string | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const playerControls = useRef<Record<string, HTMLButtonElement | null>>({});
+  const previousProject = useRef<string | null>(null);
+
+  useEffect(() => {
+    const target = activeProject ?? previousProject.current;
+    if (target) playerControls.current[target]?.focus({ preventScroll: true });
+    previousProject.current = activeProject;
+    if (!activeProject) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setActiveProject(null);
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [activeProject]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -201,7 +215,7 @@ export default function Home() {
                         allow="autoplay; encrypted-media; picture-in-picture; web-share"
                         allowFullScreen
                       />
-                      <Button className="reel-close" variant="secondary" onClick={() => setActiveProject(null)} aria-label={`Close ${project.title}`}>
+                      <Button ref={(element) => { playerControls.current[project.index] = element; }} className="reel-close" variant="secondary" onClick={() => setActiveProject(null)} aria-label={`Close ${project.title}`}>
                         Close player
                       </Button>
                     </>
@@ -209,7 +223,7 @@ export default function Home() {
                     <div className="reel-cover">
                       <span>SELECTED CUT / {project.index}</span>
                       <strong>{project.title}</strong>
-                      <Button className="reel-load" variant="secondary" size="lg" onClick={() => setActiveProject(project.index)} aria-label={`Load ${project.title} from Instagram`}>
+                      <Button ref={(element) => { playerControls.current[project.index] = element; }} className="reel-load" variant="secondary" size="lg" onClick={() => setActiveProject(project.index)} aria-label={`Load ${project.title} from Instagram`}>
                         <Play aria-hidden="true" /> Load reel
                       </Button>
                       <p>Loads an Instagram player. You can also open the original below.</p>
