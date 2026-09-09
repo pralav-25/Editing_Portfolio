@@ -51,6 +51,18 @@ pnpm build
 - `app/layout.tsx` — page metadata and social-sharing configuration
 - `public/` — favicon and social-preview assets
 
+## Update the selected reels
+
+Edit the `projects` array in [app/page.tsx](app/page.tsx). Each entry contains the
+title, category (`type`), description (`note`), original post (`href`), and player
+URL (`embed`). Keep `href` and `embed` pointed at the same Instagram post. Give
+each project a unique `index` for player state and a unique title for its React key.
+
+After editing, check the original link, **Load reel**, **Close player**, and
+Escape. Load a second reel while the first is open to confirm that only the
+selected player remains mounted. Also check the direct link when an embed is
+unavailable.
+
 ## Deployment
 
 `pnpm build` exports a static site to `dist/client` and verifies the homepage and
