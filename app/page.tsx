@@ -40,6 +40,7 @@ const method = [
 
 export default function Home() {
   const [activeProject, setActiveProject] = useState<string | null>(null);
+  const [category, setCategory] = useState('All');
   const stageRef = useRef<HTMLDivElement>(null);
   const playerControls = useRef<Record<string, HTMLButtonElement | null>>({});
   const previousProject = useRef<string | null>(null);
@@ -200,9 +201,22 @@ export default function Home() {
           </div>
         </div>
 
+        <fieldset className="reel-filters">
+          <legend>Filter selected cuts</legend>
+          {['All', ...new Set(projects.map(project => project.type))].map(type => (
+            <button type="button" key={type} aria-pressed={category === type} onClick={() => {
+              setCategory(type);
+              if (activeProject && type !== 'All' && projects.find(project => project.index === activeProject)?.type !== type) {
+                previousProject.current = null;
+                setActiveProject(null);
+              }
+            }}>{type}</button>
+          ))}
+          <output aria-live="polite">{projects.filter(project => category === 'All' || project.type === category).length} cuts shown</output>
+        </fieldset>
         <div className="project-list">
           {projects.map((project, index) => (
-            <article className={`lab-project lab-project-${project.accent}`} data-reveal key={project.title}>
+            <article hidden={category !== 'All' && project.type !== category} className={`lab-project lab-project-${project.accent}`} data-reveal key={project.title}>
               <div className="lab-media-stage">
                 <span className="lab-index">PROJECT / {project.index}</span>
                 <div className="lab-iframe-shell">

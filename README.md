@@ -83,3 +83,10 @@ upstream implementation and are checked by TypeScript and the production build.
 For an independent deployment, set `SITE_URL` to its public origin to generate
 canonical and social URLs. On Vercel, the project production hostname is used
 automatically when available.
+
+### Browse by editing style
+
+The selected-cuts filters show all reels or one editing category, with pressed
+states and an announced result count. Filtering out an active reel unloads its
+player immediately, so hidden media never continues playing. Category choices
+are derived from the project entries automatically.
