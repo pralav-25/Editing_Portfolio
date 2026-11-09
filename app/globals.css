@@ -211,6 +211,8 @@ a { color: inherit; text-decoration: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { scroll-behavior: auto !important; animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+  .motion-ready [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .film-stack { transition: none; }
 }
 
 /* Keep embeds off the network until a visitor chooses a reel. */

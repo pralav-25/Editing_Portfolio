@@ -41,12 +41,14 @@ Useful checks:
 ```bash
 pnpm typecheck
 pnpm lint
+pnpm test
 pnpm build
 ```
 
 ## Project structure
 
 - `app/page.tsx` — portfolio content and interactions
+- `lib/motion.ts` — decorative motion lifecycle and live reduced-motion preference handling
 - `app/globals.css` — visual system, responsive layout, and motion
 - `app/layout.tsx` — page metadata and social-sharing configuration
 - `public/` — favicon and social-preview assets
