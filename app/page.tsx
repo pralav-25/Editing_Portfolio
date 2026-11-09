@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { mountPortfolioMotion } from '@/lib/motion';
 import {
   ArrowDown,
   ArrowDownRight,
@@ -56,63 +57,7 @@ export default function Home() {
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [activeProject]);
 
-  useEffect(() => {
-    const root = document.documentElement;
-    const stage = stageRef.current;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let frame = 0;
-
-    const update = () => {
-      frame = 0;
-      const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-      root.style.setProperty('--page-progress', String(window.scrollY / maxScroll));
-
-      if (stage && !reduced) {
-        const progress = Math.min(window.scrollY / (window.innerHeight * 1.05), 1);
-        const baseScale = window.innerWidth <= 600 ? 0.76 : 1;
-        stage.style.setProperty('--scene-rx', `${12 - progress * 8}deg`);
-        stage.style.setProperty('--scene-rz', `${-6 + progress * 8}deg`);
-        stage.style.setProperty('--scene-ry', `${-14 + progress * 22}deg`);
-        stage.style.setProperty('--scene-y', `${-50 - progress * 7}%`);
-        stage.style.setProperty('--scene-scale', String(baseScale * (1 - progress * 0.09)));
-      }
-    };
-
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-
-    const onPointerMove = (event: PointerEvent) => {
-      if (!stage || reduced) return;
-      const x = event.clientX / window.innerWidth - 0.5;
-      const y = event.clientY / window.innerHeight - 0.5;
-      stage.style.setProperty('--pointer-x', `${x * 8}deg`);
-      stage.style.setProperty('--pointer-y', `${y * -6}deg`);
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('is-visible');
-      }),
-      { threshold: 0.12 },
-    );
-
-    root.classList.add('motion-ready');
-    document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
-    window.addEventListener('pointermove', onPointerMove, { passive: true });
-    update();
-
-    return () => {
-      observer.disconnect();
-      root.classList.remove('motion-ready');
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
-      window.removeEventListener('pointermove', onPointerMove);
-      if (frame) cancelAnimationFrame(frame);
-    };
-  }, []);
+  useEffect(() => mountPortfolioMotion(stageRef.current), []);
 
   return (
     <main className="site-shell">
