@@ -116,6 +116,7 @@ export default function Home() {
 
   return (
     <main className="site-shell">
+      <a className="skip-link" href="#work">Skip to selected work</a>
       <div className="scroll-progress" aria-hidden="true"><span /></div>
 
       <header className="studio-header">
@@ -190,10 +191,10 @@ export default function Home() {
         <div>PACE <i /> SOUND <i /> MOTION <i /> FEEL <i /> PACE <i /> SOUND <i /> MOTION <i /> FEEL <i /></div>
       </div>
 
-      <section className="work-lab" id="work">
+      <section className="work-lab" id="work" tabIndex={-1} aria-labelledby="work-title">
         <div className="work-heading" data-reveal>
           <p><span>02</span> SELECTED CUTS</p>
-          <h2>WORK THAT<br /><em>DOESN&apos;T WAIT.</em></h2>
+          <h2 id="work-title">WORK THAT<br /><em>DOESN&apos;T WAIT.</em></h2>
           <div>
             <ArrowDown size={19} />
             <span>Two edits. Two different energies.<br />Both designed to hold attention.</span>
